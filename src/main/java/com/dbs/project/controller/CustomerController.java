@@ -45,13 +45,13 @@ public class CustomerController {
 	@PostMapping("/login")
 	public Set<BankAccounts> loginpost(@RequestParam("username") String username,
 			@RequestParam("password") String password) {
+		System.out.println(username);
+		System.out.println(password);
 		Set<BankAccounts> s = new HashSet<>();
-		Customer c1 = customerService.findByUsername(username);
+		
+		Customer c1 = customerService.findByUsernameAndPassword(username,password);
 
-		Customer c2 = customerService.findByPassword(password);
-
-		if (customerService.findByUsername(username) != null && customerService.findByPassword(password) != null
-				&& (c1.getPassword() == c2.getPassword())) {
+		if (c1!= null) {
 
 			s = this.customerService.findById(c1.getCid()).getBankAccountsSet();
 			return s;
@@ -79,11 +79,19 @@ public class CustomerController {
 		BankAccounts ba1 = bankaccountsservice.findByAcNumber(fromacc);
 		BankAccounts ba2 = bankaccountsservice.findByAcNumber(toacc);
 		double enteredAmount = transaction.getAmount();
-		double amount1 = ba1.getBalance() - enteredAmount;
-		double amount2 = ba2.getBalance() + enteredAmount;
+		
+		if(ba2==null || enteredAmount>ba1.getBalance())
+		{
+			transaction.setStatus("Failed");
+		}
+		else {
+			double amount1 = ba1.getBalance() - enteredAmount;
+			double amount2 = ba2.getBalance() + enteredAmount;
 		ba1.setBalance(amount1);
 		ba2.setBalance(amount2);
 		System.out.println(ba1.getBalance());
+		transaction.setStatus("Success");
+		}
 		return this.customerService.saveTransaction(transaction);
 	}
 
@@ -94,4 +102,5 @@ public class CustomerController {
 	 * }
 	 */
 
+	
 }

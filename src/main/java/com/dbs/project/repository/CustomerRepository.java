@@ -14,10 +14,8 @@ public interface CustomerRepository extends JpaRepository<Customer, Long> {
 
 	List<Customer> findAll();
 
-	Optional<Customer> findByPassword(String password);
-
 	void save(Transaction transaction);
 
-	Optional<Customer> findByUserName(String username);
+	Optional<Customer> findByUserNameAndPassword(String username, String password);
 
 }

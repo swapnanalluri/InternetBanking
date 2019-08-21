@@ -18,17 +18,18 @@ public class Transaction {
 	private long amount;
 	private String ifsc;
 	private String date = LocalDate.now().format(DateTimeFormatter.ofPattern("MM/dd/yyyy"));
-
+	private String status;
 	public Transaction() {
 
 	}
 
-	public Transaction(long fromAccountNo, long toAccountNo, long amount, String ifsc) {
+	public Transaction(long fromAccountNo, long toAccountNo, long amount, String ifsc,String status) {
 		super();
 		this.fromAccountNo = fromAccountNo;
 		this.toAccountNo = toAccountNo;
 		this.amount = amount;
 		this.ifsc = ifsc;
+		this.status=status;
 
 	}
 

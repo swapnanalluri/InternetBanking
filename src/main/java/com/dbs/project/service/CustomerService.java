@@ -11,8 +11,7 @@ public interface CustomerService {
 	List<Customer> listAll();
 	
 	Customer findById(long cusid);
-	Customer findByUsername(String username);
-	Customer findByPassword(String password);
+	Customer findByUsernameAndPassword(String username,String password);
 	Customer save(Customer customer);
 	void deleteById(long id);
   

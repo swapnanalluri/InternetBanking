@@ -23,4 +23,10 @@ public class TransactionServiceImpl implements TransactionService {
 		return this.transactionRepository.findAll();
 	}
 
+	@Override
+	@Transactional
+	public List<Transaction> listAllten(long acnum) {
+		return this.transactionRepository.getTransactions(acnum);
+	}
+
 }

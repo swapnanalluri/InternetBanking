@@ -82,18 +82,12 @@ public class CustomerServiceImpl implements CustomerService {
 
 	@Override
 	@Transactional
-	public Customer findByUsername(String username) {
+	public Customer findByUsernameAndPassword(String username, String password) {
 		
-		return this.customerRepository.findByUserName(username).get();
+		return this.customerRepository.findByUserNameAndPassword(username,password).get();
 	}
 
-	@Override
-	@Transactional
-	public Customer findByPassword(String password) {
 	
-		return this.customerRepository.findByPassword(password).get();
-
-	}
 
 	@Override
 	@Transactional

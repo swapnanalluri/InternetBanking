@@ -6,5 +6,6 @@ import com.dbs.project.model.Transaction;
 
 public interface TransactionService {
 	List<Transaction>  listAll();
+	List<Transaction>  listAllten(long acnum);
 
 }
