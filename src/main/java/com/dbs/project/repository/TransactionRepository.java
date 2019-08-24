@@ -1,5 +1,7 @@
 package com.dbs.project.repository;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -17,7 +19,13 @@ public interface TransactionRepository extends JpaRepository<Transaction, Long> 
 	 
 	List<Transaction> findAll();
 	
+	
 	@Query(value = "select * from transaction where status= 'Success' and from_account_no= :givenacnum or to_account_no= :givenacnum order by referenceno desc limit 10", nativeQuery = true)
 	 ArrayList<Transaction> getTransactions(@Param("givenacnum") Long gacnumber);
+	
 
+	@Query(value= "select sum(amount) from transaction where status= 'Success' and from_account_no= :givenacnum and date=:date1",nativeQuery = true)
+	Long getSumOfBalance(@Param("givenacnum") Long gacnumber, @Param("date1") String date1);
+
+	
 }

@@ -5,6 +5,7 @@ import java.util.List;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 
 import com.dbs.project.model.BankAccounts;
@@ -15,6 +16,8 @@ public class BankAccountsServiceImpl implements BankAccountsService{
 
 	@Autowired
 	private AccountsRepository accountRepository;
+	
+	
 	
     @Autowired
 	public BankAccountsServiceImpl(AccountsRepository accountRepository) {
@@ -62,5 +65,7 @@ public class BankAccountsServiceImpl implements BankAccountsService{
 	public BankAccounts findByAcNumber(long acnumber) {
 		return this.accountRepository.findByAcnumber(acnumber);
 	}
+
+	
 
 }
