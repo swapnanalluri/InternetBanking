@@ -22,6 +22,8 @@ import com.dbs.project.model.Transaction;
 import com.dbs.project.service.BankAccountsService;
 import com.dbs.project.service.BankService;
 import com.dbs.project.service.CustomerService;
+import com.dbs.project.service.TransactionService;
+
 import org.springframework.web.bind.annotation.RequestParam;
 
 @CrossOrigin
@@ -35,6 +37,10 @@ public class CustomerController {
 
 	@Autowired
 	BankAccountsService bankaccountsservice;
+	
+	@Autowired
+	TransactionService transactionservice;
+	
 	@Autowired
 	private BankService bankService;
 
@@ -65,31 +71,30 @@ public class CustomerController {
 
 		long fromacc = transaction.getFromAccountNo();
 		long toacc = transaction.getToAccountNo();
+		long sumamount=transactionservice.getSumOfBalance(fromacc);
 		BankAccounts ba1 = bankaccountsservice.findByAcNumber(fromacc);
 		BankAccounts ba2 = bankaccountsservice.findByAcNumber(toacc);
 		double enteredAmount = transaction.getAmount();
 		
-		if(ba2==null || enteredAmount>ba1.getBalance())
+		if(ba2==null || enteredAmount>ba1.getBalance() || ba1.getBalance()-enteredAmount<5000)
 		{
 			transaction.setStatus("Failed");
+		}
+		else if(sumamount+enteredAmount>10000)
+		{
+			transaction.setStatus("Pending");
 		}
 		else {
 			double amount1 = ba1.getBalance() - enteredAmount;
 			double amount2 = ba2.getBalance() + enteredAmount;
 		ba1.setBalance(amount1);
 		ba2.setBalance(amount2);
-		System.out.println(ba1.getBalance());
 		transaction.setStatus("Success");
 		}
 		return this.customerService.saveTransaction(transaction);
 	}
 
-	/*
-	 * @GetMapping("/transactionsbtndate") public Transaction
-	 * betweendates(@RequestBody Transaction transaction) {
-	 * 
-	 * }
-	 */
+	
 
 	
 }

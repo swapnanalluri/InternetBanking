@@ -28,8 +28,10 @@ public class TransactionController {
 	}
 	
 	@GetMapping("/Last-ten-transactions/{acnum}")
-	public List<Transaction> listAlla(@PathVariable long acnum){
+	public List<Transaction> listAllTen(@PathVariable long acnum){
 		return transactionService.listAllten(acnum);
 	}
+	
+	
 	
 }
