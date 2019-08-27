@@ -53,7 +53,8 @@ public class BankController {
 	public String create(@RequestBody Customer customer) {
 		String uname=customer.getUserName();
 		Bank b1=bankService.findByUsername(uname);
-		if(b1!=null) {
+		System.out.println(b1);
+		if(b1==null) {
 		 this.bankService.save(customer);
 		 return "Created Successfully";
 		}

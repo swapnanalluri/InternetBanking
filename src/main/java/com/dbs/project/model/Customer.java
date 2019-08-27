@@ -36,9 +36,12 @@ public class Customer implements Serializable, Comparable<Customer> {
 	@Column(name = "phoneno", nullable = false)
 	private String phoneNo;
 
-	@JsonIgnore
-	@OneToOne(cascade = CascadeType.ALL)
-	private Address address;
+	@Column(name = "address", nullable = false)
+	private String address;
+
+	private String city;
+    private String state;
+    private String zip;
 
 	@JsonIgnore
 	@OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
@@ -47,15 +50,20 @@ public class Customer implements Serializable, Comparable<Customer> {
 	public Customer() {
 
 	}
-
-	public Customer(String name, String userName, String password, String pan, String phoneNo) {
+	public Customer(String name, String userName, String password, String pan, String phoneNo, String address,
+			String city, String state, String zip) {
+		super();
 		this.name = name;
 		this.userName = userName;
 		this.password = password;
 		this.pan = pan;
 		this.phoneNo = phoneNo;
+		this.address = address;
+		this.city = city;
+		this.state = state;
+		this.zip = zip;
 	}
-
+	
 
 	@Override
 	public int compareTo(Customer customer) {
@@ -66,6 +74,11 @@ public class Customer implements Serializable, Comparable<Customer> {
 		this.bankAccountsSet.add(bankAccounts);
 		bankAccounts.setCustomer(this);
 	}
+
+
+
+
+	
 
 	
 	
