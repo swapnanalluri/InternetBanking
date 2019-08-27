@@ -84,8 +84,8 @@ public class CustomerServiceImpl implements CustomerService {
 	@Transactional
 	public Optional<Customer> findByUsernameAndPassword(String username, String password) {
 		
-		return this.customerRepository.findByUserNameAndPassword(username, password);	
-		}
+		return this.customerRepository.findByUserNameAndPassword(username,password);
+	}
 
 	
 

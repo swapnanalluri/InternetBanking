@@ -50,8 +50,16 @@ public class BankController {
 	}
 
 	@PostMapping("/customers/create")
-	public Customer create(@RequestBody Customer customer) {
-		return this.bankService.save(customer);
+	public String create(@RequestBody Customer customer) {
+		String uname=customer.getUserName();
+		Bank b1=bankService.findByUsername(uname);
+		if(b1!=null) {
+		 this.bankService.save(customer);
+		 return "Created Successfully";
+		}
+		else {
+		return "UserName already exists";
+		}
 
 	}
 
