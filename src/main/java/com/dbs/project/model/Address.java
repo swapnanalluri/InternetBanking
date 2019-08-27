@@ -7,6 +7,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.Data;
 
 
@@ -23,6 +25,7 @@ public class Address {
     private String state;
     private String zip;
 
+    @JsonIgnore
     @OneToOne(mappedBy = "address")
     @PrimaryKeyJoinColumn
     private Customer customer;

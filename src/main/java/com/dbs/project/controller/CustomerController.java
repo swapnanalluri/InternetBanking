@@ -2,6 +2,7 @@ package com.dbs.project.controller;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 import javax.validation.Valid;
@@ -48,31 +49,19 @@ public class CustomerController {
 		return customerService.listAll();
 	}
 
-	@PostMapping("/login")
-	public Set<BankAccounts> loginpost(@RequestParam("username") String username,
-			@RequestParam("password") String password) {
-		System.out.println(username);
-		System.out.println(password);
-		Set<BankAccounts> s = new HashSet<>();
-		
-		Customer c1 = customerService.findByUsernameAndPassword(username,password);
-
-		if (c1!= null) {
-
-			s = this.customerService.findById(c1.getCid()).getBankAccountsSet();
-			return s;
-		} else
-			return s;
+	@GetMapping("/customer/{username}/{password}")
+	public Optional<Customer> getCustomerByUserNameAndPassword(@PathVariable("username") String username,@PathVariable("password") String password) {
+		return customerService.findByUsernameAndPassword(username,password);
 	}
 
-	@GetMapping("/customers/{id}/accounts")
+	@GetMapping("/customer/{id}/accounts")
 	public Set<BankAccounts> getCustomerAccount(@PathVariable long id) {
 
 		return this.customerService.findById(id).getBankAccountsSet();
 
 	}
 
-	@PutMapping("customers/{id}/update")
+	@PutMapping("customer/{id}/update")
 	public Customer update(@PathVariable("id") Long id, @Valid @RequestBody Customer customer) {
 		return this.customerService.updateCustomer(id, customer);
 	}

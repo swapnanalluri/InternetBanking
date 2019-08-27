@@ -14,6 +14,7 @@ public interface BankAccountsService {
 	BankAccounts updateAccount(long id, BankAccounts account);
 
 	void deleteAccount(long id);
+	
 	BankAccounts findByAcNumber(long acnumber);
 	
 }

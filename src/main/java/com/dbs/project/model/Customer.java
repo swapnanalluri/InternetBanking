@@ -24,7 +24,7 @@ public class Customer implements Serializable, Comparable<Customer> {
 	@Column(name = "customername", nullable = false)
 	private String name;
 
-	@Column(name = "username", nullable = false)
+	@Column(name = "username", unique=true,nullable = false)
 	private String userName;
 
 	@Column(name = "password", nullable = false)
@@ -36,6 +36,7 @@ public class Customer implements Serializable, Comparable<Customer> {
 	@Column(name = "phoneno", nullable = false)
 	private String phoneNo;
 
+	@JsonIgnore
 	@OneToOne(cascade = CascadeType.ALL)
 	private Address address;
 
@@ -66,4 +67,6 @@ public class Customer implements Serializable, Comparable<Customer> {
 		bankAccounts.setCustomer(this);
 	}
 
+	
+	
 }
