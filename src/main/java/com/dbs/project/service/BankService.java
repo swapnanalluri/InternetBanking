@@ -1,6 +1,7 @@
 package com.dbs.project.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.dbs.project.model.Bank;
 import com.dbs.project.model.Customer;
@@ -25,6 +26,6 @@ public interface BankService {
 	void deleteCustomerById(long cusid);
 	
 	//void deleteAccount(long id,long aid);
-
+	Optional<Bank> findByUsernameAndPassword(String username,String password);
 	void deleteAccount(long aid);
 }

@@ -1,6 +1,7 @@
 package com.dbs.project.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.transaction.Transactional;
 
@@ -88,6 +89,13 @@ public class BankServiceImpl implements BankService {
 	public void deleteAccount(long aid) {
 		this.accountsRepository.deleteById(aid);
 
+	}
+
+	@Override
+	public Optional<Bank> findByUsernameAndPassword(String username, String password) {
+		
+		return this.bankRepository.findByUsernameAndPassword(username,password);
+		
 	}
 
 }

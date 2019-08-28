@@ -1,6 +1,7 @@
 package com.dbs.project.controller;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
@@ -38,18 +39,9 @@ public class BankController {
 	@Autowired
 	private BankAccountsService bankAccountsService;
 
-	@PostMapping("/login")
-	public String loginpost(
-
-			@RequestParam("username") String username, @RequestParam("password") String password, Model model) {
-		Bank b1 = bankService.findByUsername(username);
-		Bank b2 = bankService.findByPassword(password);
-
-		if (b1 != null && b2 != null && b1.equals(b2)) {
-			model.addAttribute("user", username);
-			return "success";
-		}
-		return "login";
+	@GetMapping("/login/{username}/{password}")
+	public Optional<Bank> getBankByUserNameAndPassword(@PathVariable("username") String username,@PathVariable("password") String password) {
+		return bankService.findByUsernameAndPassword(username,password);
 	}
 
 	@PostMapping("/customers/create")
