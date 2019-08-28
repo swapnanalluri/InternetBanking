@@ -71,20 +71,20 @@ public class CustomerController {
 
 		long fromacc = transaction.getFromAccountNo();
 		long toacc = transaction.getToAccountNo();
+		String ifsc=transaction.getIfsc();
 		long sumamount;
-	if(transactionservice.getSumOfBalance(fromacc)==null)
-	{
-		sumamount=0;
-	}
-	else {
-		sumamount=transactionservice.getSumOfBalance(fromacc);
-	}
-	
+		if(transactionservice.getSumOfBalance(fromacc)==null){
+			sumamount=0;
+		}
+		else {
+			sumamount=transactionservice.getSumOfBalance(fromacc);
+		}
 		BankAccounts ba1 = bankaccountsservice.findByAcNumber(fromacc);
 		BankAccounts ba2 = bankaccountsservice.findByAcNumber(toacc);
+		BankAccounts ba3 = bankaccountsservice.findByIfscAndAcnumber(ifsc, toacc);
 		double enteredAmount = transaction.getAmount();
 		
-		if(ba2==null || enteredAmount>ba1.getBalance() || ba1.getBalance()-enteredAmount<5000)
+		if(ba2==null || ba3==null || enteredAmount>ba1.getBalance() || ba1.getBalance()-enteredAmount<5000)
 		{
 			transaction.setStatus("Failed");
 		}

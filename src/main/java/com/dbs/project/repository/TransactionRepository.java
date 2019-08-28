@@ -20,8 +20,9 @@ public interface TransactionRepository extends JpaRepository<Transaction, Long> 
 	List<Transaction> findAll();
 	
 	
-	@Query(value = "select * from transaction where status= 'Success' and from_account_no= :givenacnum or to_account_no= :givenacnum order by referenceno desc limit 10", nativeQuery = true)
+	@Query(value = "select * from transaction where status= 'Success' and (from_account_no= :givenacnum or to_account_no= :givenacnum) order by referenceno desc limit 10", nativeQuery = true)
 	 ArrayList<Transaction> getTransactions(@Param("givenacnum") Long gacnumber);
+
 	
 
 	@Query(value= "select sum(amount) from transaction where status= 'Success' and from_account_no= :givenacnum and date=:date1",nativeQuery = true)

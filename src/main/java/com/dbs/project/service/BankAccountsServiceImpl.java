@@ -66,6 +66,11 @@ public class BankAccountsServiceImpl implements BankAccountsService{
 		return this.accountRepository.findByAcnumber(acnumber);
 	}
 
+	@Override
+	public BankAccounts findByIfscAndAcnumber(String ifsc, long acnumber) {	
+		return this.accountRepository.findByIfscAndAcnumber(ifsc, acnumber);
+	}
+
 	
 
 }

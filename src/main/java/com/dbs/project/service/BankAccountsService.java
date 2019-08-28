@@ -17,4 +17,6 @@ public interface BankAccountsService {
 	
 	BankAccounts findByAcNumber(long acnumber);
 	
+	BankAccounts findByIfscAndAcnumber(String ifsc,long acnumber);
+	
 }

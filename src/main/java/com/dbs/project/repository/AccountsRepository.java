@@ -9,5 +9,6 @@ import com.dbs.project.model.BankAccounts;
 public interface AccountsRepository extends JpaRepository<BankAccounts, Long> {
 	
 	BankAccounts findByAcnumber(long acnumber);
+	BankAccounts findByIfscAndAcnumber(String ifsc,long acnumber);
 
 }
