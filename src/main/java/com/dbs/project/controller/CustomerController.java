@@ -71,7 +71,15 @@ public class CustomerController {
 
 		long fromacc = transaction.getFromAccountNo();
 		long toacc = transaction.getToAccountNo();
-		long sumamount=transactionservice.getSumOfBalance(fromacc);
+		long sumamount;
+	if(transactionservice.getSumOfBalance(fromacc)==null)
+	{
+		sumamount=0;
+	}
+	else {
+		sumamount=transactionservice.getSumOfBalance(fromacc);
+	}
+	
 		BankAccounts ba1 = bankaccountsservice.findByAcNumber(fromacc);
 		BankAccounts ba2 = bankaccountsservice.findByAcNumber(toacc);
 		double enteredAmount = transaction.getAmount();
