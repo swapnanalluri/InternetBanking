@@ -17,7 +17,7 @@ public interface CustomerService {
   
 	Customer updateCustomer(long cusid, Customer customer);
 	Transaction saveTransaction(Transaction transaction);
-
+	Customer findByUsername(String username);
 
 		
 }

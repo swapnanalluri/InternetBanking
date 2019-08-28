@@ -20,6 +20,7 @@ import com.dbs.project.model.Customer;
 import com.dbs.project.repository.BankRepository;
 import com.dbs.project.service.BankAccountsService;
 import com.dbs.project.service.BankService;
+import com.dbs.project.service.CustomerService;
 
 @CrossOrigin
 @RestController
@@ -28,6 +29,8 @@ public class BankController {
 
 	@Autowired
 	private BankService bankService;
+	@Autowired
+	private CustomerService customerService;
 
 	@Autowired
 	private BankRepository bankRepository;
@@ -50,16 +53,17 @@ public class BankController {
 	}
 
 	@PostMapping("/customers/create")
-	public String create(@RequestBody Customer customer) {
+	public Customer create(@RequestBody Customer customer) {
+		Customer c2=new Customer();
 		String uname=customer.getUserName();
-		Bank b1=bankService.findByUsername(uname);
-		System.out.println(b1);
-		if(b1==null) {
-		 this.bankService.save(customer);
-		 return "Created Successfully";
-		}
+		Customer c1=customerService.findByUsername(uname);
+		System.out.println(uname);
+		System.out.println(c1);
+		if(c1==null) {
+			 return this.bankService.save(customer);	 
+			}
 		else {
-		return "UserName already exists";
+		return c2;
 		}
 
 	}

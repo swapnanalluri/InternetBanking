@@ -76,10 +76,4 @@ public class Customer implements Serializable, Comparable<Customer> {
 	}
 
 
-
-
-	
-
-	
-	
 }

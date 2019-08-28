@@ -3,6 +3,8 @@ package com.dbs.project.model;
 import javax.persistence.*;
 
 import lombok.Data;
+
+import java.sql.Date;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 

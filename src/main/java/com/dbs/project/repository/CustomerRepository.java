@@ -1,5 +1,6 @@
 package com.dbs.project.repository;
 
+
 import com.dbs.project.model.Customer;
 import com.dbs.project.model.Transaction;
 
@@ -17,5 +18,5 @@ public interface CustomerRepository extends JpaRepository<Customer, Long> {
 	void save(Transaction transaction);
 
 	Optional<Customer> findByUserNameAndPassword(String username, String password);
-
+	Customer findByUserName(String name);
 }

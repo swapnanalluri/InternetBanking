@@ -38,6 +38,6 @@ public class TransactionServiceImpl implements TransactionService {
 		return this.transactionRepository.getSumOfBalance(acnum, date1);
 	}
 
-	
+
 
 }

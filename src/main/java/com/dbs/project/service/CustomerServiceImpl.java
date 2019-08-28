@@ -95,6 +95,11 @@ public class CustomerServiceImpl implements CustomerService {
 		 return this.transactionRepository.save(transaction);
 	}
 
+	@Override
+	public Customer findByUsername(String username) {
+		return this.customerRepository.findByUserName(username);
+	}
+
 	
 	
 
