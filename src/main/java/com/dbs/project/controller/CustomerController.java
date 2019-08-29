@@ -49,6 +49,10 @@ public class CustomerController {
 		return customerService.listAll();
 	}
 
+	@GetMapping("/customer/{id}")
+	public Customer listCustomerById(@PathVariable long id) {
+		return customerService.findById(id);
+	}
 	@GetMapping("/customer/{username}/{password}")
 	public Optional<Customer> getCustomerByUserNameAndPassword(@PathVariable("username") String username,@PathVariable("password") String password) {
 		return customerService.findByUsernameAndPassword(username,password);
